@@ -1,0 +1,4 @@
+h1 All Contacts
+ul
+  each ac in c
+    li: a(href="/contacts/#{ac.name}") #{ac.name} (#{ac.email})

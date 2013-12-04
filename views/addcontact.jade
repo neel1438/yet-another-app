@@ -1,0 +1,19 @@
+meta(name="viewport",content="width=device-width ,intial-scale=1.0")
+include cssjs
+body
+  div.container
+   div.row
+    div.col-md-4
+       form(action="/contacts",class="form-horizontal",method='post')
+        fieldset
+         legend Add Contact
+         input.input-lg(type='text',name='name', placeholder='Name')
+         span.help-block Name of the Contact. 
+         input.input-lg(type='text',name="place", placeholder='Place')
+         span.help-block Where does the contact live ?. 
+         input.input-lg(type='text',name='email', placeholder='Email address')
+         span.help-block Email ID of the Contact. 
+         input.input-lg(type='text',name='phone', placeholder='Phone number')
+         span.help-block PhoneNumber of the Contact. 
+         input.btn.btn-lg(type='submit',name='add',class="btn-primary", value='Add')
+    
