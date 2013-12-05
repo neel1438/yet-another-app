@@ -4,7 +4,7 @@ body
   div.container
    div.row
     div.col-md-4
-       form(action="/contacts/#{contact.name}",class="form-horizontal",method='post',enctype="multipart/form-data")
+       form(action="/contact/#{contact.name}",class="form-horizontal",method='post',enctype="multipart/form-data")
         fieldset
          legend Edit Contact
          input(type="hidden",name="_method",value="put")

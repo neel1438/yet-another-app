@@ -1,13 +1,18 @@
 include cssjs
-h1 #{contact.name}
-img(src="#{contact.path}" ,alt="image not available!",height="256", width= "192")
+link(rel='stylesheet', href='/stylesheets/showcontact.css')
 ul
-  li Place : #{contact.place}
-  li Email : #{contact.email}
-  li Phone : #{contact.phone}
-input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") 
-input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact.name}/edit"',value="Edit") 
-form(action="/contact/#{contact.name}",method="post")
-  input(type="hidden",name="_method",value="delete")
-  button.btn.btn-danger(type="submit") Delete
+  li  
+    img(src="#{contact.path}" ,alt="image not available!" )
+    p Name : 
+        strong #{contact.name}
+    p Place : #{contact.place}
+    p Email : #{contact.email}
+    p Phone : #{contact.phone}
+form.form-inline(action="/contact/#{contact.name}",method="post")
+   input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") i
+   span &nbsp&nbsp;
+   input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact.name}/edit"',value="Edit") 
+   span &nbsp&nbsp;
+   input(type="hidden",name="_method",value="delete")
+   button.btn.btn-danger(type="submit") Delete 
   

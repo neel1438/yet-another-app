@@ -1,9 +1,33 @@
 include cssjs
+link(rel='stylesheet', href='/stylesheets/showcontacts.css')
+head
+  script
+    var container = $("#container");
+    imagesLoaded($("#container"), function() {
+        //alert("images loaded")
+         $("#container").masonry({
+               columnWidth: 10,
+               itemSelector: '.item'
+              });
+        });
+
+div(style="float:right")
+  a(href="/contacts/new" class="btn btn-success")
+    i(class="glyphicon-white glyphicon-plus") 
+     span &nbsp;Add New
+  span &nbsp&nbsp;
+  a(href="/", class="btn btn-info")
+   i(class="glyphicon glyphicon-arrow-left") 
+    span Back
+
 h1 All Contacts
+hr
 
-ul
+div#container
   each ac in c
-    li: a(href="/contact/#{ac.name}") #{ac.name} (#{ac.email})
-
-a(href="/contacts/new" class="btn btn-success btn-large")
-  i(class="icon-white icon-plus") Add New
+    a(href="/contact/#{ac.name}") 
+      div.item
+         img.img-thumbnail(src="#{ac.path}",height=auto ,width="72",style="{float: left}")
+         p 
+           strong  #{ac.name} 
+      
