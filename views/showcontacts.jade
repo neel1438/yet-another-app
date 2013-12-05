@@ -1,4 +1,9 @@
+include cssjs
 h1 All Contacts
+
 ul
   each ac in c
-    li: a(href="/contacts/#{ac.name}") #{ac.name} (#{ac.email})
+    li: a(href="/contact/#{ac.name}") #{ac.name} (#{ac.email})
+
+a(href="/contacts/new" class="btn btn-success btn-large")
+  i(class="icon-white icon-plus") Add New

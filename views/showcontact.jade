@@ -1,6 +1,13 @@
+include cssjs
 h1 #{contact.name}
+img(src="#{contact.path}" ,alt="image not available!",height="256", width= "192")
 ul
   li Place : #{contact.place}
   li Email : #{contact.email}
   li Phone : #{contact.phone}
+input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") 
+input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact.name}/edit"',value="Edit") 
+form(action="/contact/#{contact.name}",method="post")
+  input(type="hidden",name="_method",value="delete")
+  button.btn.btn-danger(type="submit") Delete
   
