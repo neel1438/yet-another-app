@@ -89,7 +89,7 @@ app.post('/contacts',function(req,res){
 
 // param method to select the contact exactly---presently assumes that the name is unique
 app.param('name' , function(req,res,next,name){
-contacts.find({name: name},function(err,docs){
+contacts.find({name : name},function(err,docs){
   req.contact=docs[0];
   next();
    });
