@@ -8,10 +8,10 @@ ul
     p Place : #{contact.place}
     p Email : #{contact.email}
     p Phone : #{contact.phone}
-form.form-inline(action="/contact/#{contact.name}",method="post")
+form.form-inline(action="/contact/#{contact._id}",method="post")
    input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") 
    span &nbsp&nbsp;
-   input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact.name}/edit"',value="Edit") 
+   input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact._id}/edit"',value="Edit") 
    span &nbsp&nbsp;
    input(type="hidden",name="_method",value="delete")
    button.btn.btn-danger(type="submit") Delete 

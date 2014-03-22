@@ -83,30 +83,30 @@ app.post('/contacts',function(req,res){
       path : "/uploads/"+req.files.Image.originalFilename
       }).save(function(err,contact){
       if(err) res.json(err);
-      res.redirect('/contact/'+ contact.name);
+      res.redirect('/contact/'+ contact._id);
         });
      });
 
 // param method to select the contact exactly---presently assumes that the name is unique
-app.param('name' , function(req,res,next,name){
-contacts.find({name : name},function(err,docs){
+app.param('id' , function(req,res,next,id){
+contacts.find({_id :id},function(err,docs){
   req.contact=docs[0];
   next();
    });
     });
 
 //personal contact page
-app.get("/contact/:name",function(req,res){
+app.get("/contact/:id",function(req,res){
   res.render('showcontact',{contact : req.contact});
   });
 
 //edit form
-app.get('/contact/:name/edit',function(req,res){
+app.get('/contact/:id/edit',function(req,res){
     res.render('editcontact',{contact : req.contact});
     });
 
 // update db with edited row 
-app.put('/contact/:name',function(req,res){
+app.put('/contact/:id',function(req,res){
    // console.log(req.files);
     var b=req.body
     if(req.files.Image.originalFilename)
@@ -118,7 +118,7 @@ app.put('/contact/:name',function(req,res){
         if(err) res.send(err);
         });
       });
-contacts.update({name :req.params.name},
+contacts.update({_id :req.params.id},
   {
     name: b.name,
     place : b.place,
@@ -126,25 +126,25 @@ contacts.update({name :req.params.name},
     path : "/uploads/"+req.files.Image.originalFilename
   },function(err){
   if(err) res.send(err)
-  res.redirect("/contact/"+b.name)  
+  res.redirect("/contact/"+req.params.id)  
   });
     }
     else
     {
-contacts.update({name :req.params.name},
+	contacts.update({_id :req.params.id},
   {
     name: b.name,
     place : b.place,
     email : b.email,
   },function(err){
   if(err) res.send(err)
-  res.redirect("/contact/"+b.name)  
+  res.redirect("/contact/"+req.params.id)  
   });
  }
   });
 
-app.delete('/contact/:name',function(req,res){
-    contacts.remove({name: req.params.name},function(err){
+app.delete('/contact/:id',function(req,res){
+    contacts.remove({_id: req.params.id},function(err){
       if(err)res.send(err)
       res.redirect("/contacts")
       })

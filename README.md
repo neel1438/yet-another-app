@@ -1,17 +1,20 @@
-Yet-Another-App
-===============
+Yet-Another-App V-0.0.2
+======================
 
 This is an multipurpose application specially handy for students
- 
-presently there are a lot of bugs
 
 Current functions 
+=================
+1) Contact Manager
 
-1) Add contacts
+Upcoming (V-0.0.3)
+=================
 
-Upcoming
+1) User Login and Registration
+2) New Individual Contact Page
 
-1) User Registration
-2) Edit Individual Contact
+Bugs
+====
+1) Duplicate Contacts deleted
 
 

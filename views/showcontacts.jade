@@ -25,7 +25,7 @@ h1 Your Contacts
 hr
 div#container
   each ac in c
-    a(href="/contact/#{ac.name}") 
+    a(href="/contact/#{ac._id}") 
       div.item
         img.img-thumbnail(src="#{ac.path}",height=auto ,width="72",style="{float: left}")
         p 
