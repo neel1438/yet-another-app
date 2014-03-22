@@ -9,7 +9,7 @@ ul
     p Email : #{contact.email}
     p Phone : #{contact.phone}
 form.form-inline(action="/contact/#{contact.name}",method="post")
-   input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") i
+   input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") 
    span &nbsp&nbsp;
    input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact.name}/edit"',value="Edit") 
    span &nbsp&nbsp;
