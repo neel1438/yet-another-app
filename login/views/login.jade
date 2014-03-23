@@ -1,0 +1,14 @@
+meta(name="viewport",content="width=device-width ,intial-scale=1.0")
+include cssjs
+body
+  div.container
+   div.row
+    div.col-md-4
+       form(action="/login",class="form-horizontal",method='post')
+        fieldset
+         legend Login
+         input.input-lg(type='text',name='email', placeholder='Email address')
+         span.help-block Your Email ID. 
+         input.input-lg(type='password',name='password', placeholder='Password')
+         span.help-block Password.
+         input.btn.btn-lg(type='submit',class="btn-primary", value='Login')

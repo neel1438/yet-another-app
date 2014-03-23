@@ -1,0 +1,16 @@
+meta(name="viewport",content="width=device-width ,intial-scale=1.0")
+include cssjs
+body
+  div.container
+   div.row
+    div.col-md-4
+       form(action="/newuser",class="form-horizontal",method='post')
+        fieldset
+         legend Add User
+         input.input-lg(type='text',name='name', placeholder='Name')
+         span.help-block Your Name Please. 
+         input.input-lg(type='text',name='email', placeholder='Email address')
+         span.help-block Your Email ID. 
+         input.input-lg(type='password',name='password', placeholder='Password')
+         span.help-block Password.
+         input.btn.btn-lg(type='submit',class="btn-primary", value='Signup')

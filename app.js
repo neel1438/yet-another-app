@@ -5,16 +5,16 @@
 var express =require("express");
 var http = require('http');
 var contacts=require("./contacts");
-var route=require("./routes")
+var login=require("./login");
+var route=require("./routes");
 var app=express();
 
 //server config
 app.set('port',  process.env.PORT || 3000);
 app.set('view engine', 'jade');
-//index page
-app.get('/',route.index);
 
-//contacts module
+// modulea
+app.use(login);
 app.use(contacts);
 
 //server create

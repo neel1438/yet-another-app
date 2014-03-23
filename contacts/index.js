@@ -30,7 +30,7 @@ if ('development' == app.get('env')) {
 }
 
 // db connection
-mongoose.connect("mongodb://localhost/contacts");
+var contactconn=mongoose.createConnection("mongodb://localhost/contacts");
 
 //db schema
 var contactSchema=new mongoose.Schema(
@@ -43,7 +43,7 @@ var contactSchema=new mongoose.Schema(
      }
     );
 //instance variable
-contacts=mongoose.model('contacts',contactSchema);
+contacts=contactconn.model('contacts',contactSchema);
 
 // show all contacts!!
 app.get('/contacts',function(req,res){

@@ -8,7 +8,8 @@
   "dependencies": {
     "express": "*",
     "jade": "*" ,
-    "mongoose" : "*"
+    "mongoose" : "*",
+    "bcrypt" : "*"
   },
   "devDependencies" :{
     "nodemon" : "*"
