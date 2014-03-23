@@ -63,30 +63,26 @@ function checkauth(req, res, next) {
 
 // add a signup form
 app.get('/signup',function(req,res){
-		if(req.session.user_email) res.send("already looged in logout out first!")
+		if(req.session.user_email) res.send("already logged in! Please logout out first!")
 		else res.render('signup');
 		});
 //login page
 app.get('/login',function(req,res){
-		if(req.session.user_email) res.send("already logged in");
+		if(req.session.user_email) res.send("Already logged in");
 		else res.render('login');
 		});
 app.post('/loginuser',function(req,res){
 		var b=req.body;
 		user.find({email :b.email},function(err,docs){
 			var lol=docs[0];
-			console.log(lol)
 			bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
 			if(isloggedin)
 			{
-			console.log("logged in");
 			req.session.user_email = b.email;
 			res.redirect('/home')
 			}
 			else
 			{
-			
-			console.log("wrong pass");
 			res.redirect('/login');
 			}
 			});
@@ -107,12 +103,10 @@ app.post('/newuser',function(req,res){
 						email :b.email,
 						passwordhash : hash
 						}
-						console.log(userobj)
 				new user(userobj).save(function(err,userobj){
 				if(err) throw err;
 				else
 				{
-					console.log("saved user")
 					req.session.user_email = b.email;
 					res.redirect('/home');
 				}

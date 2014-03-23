@@ -4,15 +4,15 @@
 
 var express =require("express");
 var http = require('http');
-var contacts=require("./contacts");
-var login=require("./login");
+var contacts=require("./modules/contacts");
+var login=require("./modules/login");
 var app=express();
 
 //server config
 app.set('port',  process.env.PORT || 3000);
 app.set('view engine', 'jade');
 
-// modulea
+// modules used
 app.use(login);
 app.use(contacts);
 
