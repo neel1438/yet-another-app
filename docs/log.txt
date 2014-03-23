@@ -1,0 +1,4 @@
+fixed bug#001 - 22 mar 2014
+
+modularized the code -23 mar 2014
+
