@@ -4,11 +4,15 @@ Bugs Reported
 BugID - 001
 Description - If names are same on clicking delete all contacts get deleted
 -----------------------------------------------------------------------------
-BugId - 002
-Description -
-
+BugID - 002
+Description - Login or signup possible even if a user is logged in
+-----------------------------------------------------------------------------
 Bugs Fixed
 ==========
 
-BugId - 001
+BugID - 001
 Description - Used Unique Ids to rectify
+-----------------------------------------------------------------------------
+
+BugID - 002
+Description - Checks functions for all requests

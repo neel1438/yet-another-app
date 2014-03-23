@@ -50,27 +50,31 @@ user=userconn.model('user',userSchema);
 
 function checkauth(req, res, next) {
 	if (!req.session.user_email) {
-		res.send('You are not authorized to view this page');
+		res.redirect('/login')
 	} else {
 		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-		next();
+		next()
 	}
 }
 
 
 
+
 // add a signup form
 app.get('/signup',function(req,res){
-		res.render('signup');
+		if(req.session.user_email) res.send("already looged in logout out first!")
+		else res.render('signup');
 		});
 //login page
 app.get('/login',function(req,res){
-		res.render('login');
+		if(req.session.user_email) res.send("already logged in");
+		else res.render('login');
 		});
 app.post('/login',function(req,res){
 		var b=req.body;
 		user.find({email :b.email},function(err,docs){
 			var lol=docs[0];
+			console.log(lol)
 			bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
 			if(isloggedin)
 			{
@@ -102,6 +106,7 @@ app.post('/newuser',function(req,res){
 						email :b.email,
 						passwordhash : hash
 						}
+						console.log(userobj)
 				new user(userobj).save(function(err,userobj){
 				if(err) throw err;
 				else

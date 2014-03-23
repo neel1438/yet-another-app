@@ -4,3 +4,5 @@ modularized the code(contacts module) -23 mar 2014
 
 wrote login module -- 23 mar 2014
 
+Fixed bug#002 - 23 mar 2014
+

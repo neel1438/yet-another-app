@@ -6,7 +6,6 @@ var express =require("express");
 var http = require('http');
 var contacts=require("./contacts");
 var login=require("./login");
-var route=require("./routes");
 var app=express();
 
 //server config
