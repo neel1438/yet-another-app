@@ -71,7 +71,7 @@ app.get('/login',function(req,res){
 		if(req.session.user_email) res.send("already logged in");
 		else res.render('login');
 		});
-app.post('/login',function(req,res){
+app.post('/loginuser',function(req,res){
 		var b=req.body;
 		user.find({email :b.email},function(err,docs){
 			var lol=docs[0];
@@ -129,7 +129,6 @@ app.get('/home',checkauth,function(req,res)
 		});
 app.get('/logout',checkauth,function(req,res){
 		delete req.session.user_email;
-		mongoose.disconnect();
 		res.redirect('/');
 		});
 
