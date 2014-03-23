@@ -5,7 +5,7 @@ BugID - 001
 Description - If names are same on clicking delete all contacts get deleted
 -----------------------------------------------------------------------------
 BugId - 002
-Description - yet to be reported
+Description -
 
 Bugs Fixed
 ==========

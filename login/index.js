@@ -122,7 +122,8 @@ app.get('/home',checkauth,function(req,res)
 		res.render('home');
 		});
 app.get('/logout',checkauth,function(req,res){
-		delete req.session.user_id;
+		delete req.session.user_email;
+		mongoose.disconnect();
 		res.redirect('/');
 		});
 
