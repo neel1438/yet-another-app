@@ -1,8 +1,17 @@
 fixed bug#001 - 22 mar 2014
 
-modularized the code(contacts module) -23 mar 2014
+modularized the code -- contacts - 23 mar 2014
 
-wrote login module -- 23 mar 2014
+wrote a module -- login - 23 mar 2014
 
 Fixed bug#002 - 23 mar 2014
+
+Minor Bugs fixed --login and contacts - 23 mar 2014
+
+Minor Bugs fixed --login and contacts - 24 mar 2014
+
+Custom error pages -- login and contacts - 24 mar 2014
+
+Use cookies instead of sessions -- login - 24 mar 2014
+
 

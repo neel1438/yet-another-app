@@ -50,7 +50,7 @@ passwordhash: String
 user=userconn.model('user',userSchema);
 
 function checkauth(req, res, next) {
-	if (!req.session.user_email) {
+	if (!req.cookies.user_email) {
 		res.redirect('/login')
 	} else {
 		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -63,29 +63,30 @@ function checkauth(req, res, next) {
 
 // add a signup form
 app.get('/signup',function(req,res){
-		if(req.session.user_email) res.send("already logged in! Please logout out first!")
+		if(req.cookies.user_email) res.send("already logged in! Please logout out first!")
 		else res.render('signup');
 		});
 //login page
 app.get('/login',function(req,res){
-		if(req.session.user_email) res.send("Already logged in");
+		if(req.cookies.user_email) res.send("Already logged in");
 		else res.render('login');
 		});
 app.post('/loginuser',function(req,res){
 		var b=req.body;
-		user.find({email :b.email},function(err,docs){
+		user.find({email : b.email},function(err,docs){
+			if(!docs[0]) res.render('error',{msg:"Invalid Username"});
+			else{
 			var lol=docs[0];
 			bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
 			if(isloggedin)
 			{
-			req.session.user_email = b.email;
+			res.cookie('user_email',b.email)
 			res.redirect('/home')
 			}
-			else
-			{
-			res.redirect('/login');
+			else res.render('error',{msg: "Wrong Password"})
 			}
-			});
+			);
+			}
 			});
 		});
 
@@ -107,7 +108,7 @@ app.post('/newuser',function(req,res){
 				if(err) throw err;
 				else
 				{
-					req.session.user_email = b.email;
+					res.cookie('user_email',b.email)
 					res.redirect('/home');
 				}
 				});
@@ -122,7 +123,6 @@ app.get('/home',checkauth,function(req,res)
 		res.render('home');
 		});
 app.get('/logout',checkauth,function(req,res){
-		delete req.session.user_email;
+		res.clearCookie('user_email');
 		res.redirect('/');
 		});
-

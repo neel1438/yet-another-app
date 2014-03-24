@@ -7,12 +7,17 @@ Description - If names are same on clicking delete all contacts get deleted
 BugID - 002
 Description - Login or signup possible even if a user is logged in
 -----------------------------------------------------------------------------
+BugID - 003
+Description - Validation of form fields new contact
+-----------------------------------------------------------------------------
+BugID - 004
+
 Bugs Fixed
 ==========
 
 BugID - 001
 Description - Used Unique Ids to rectify
 -----------------------------------------------------------------------------
-
 BugID - 002
 Description - Checks functions for all requests
+-----------------------------------------------------------------------------

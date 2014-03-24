@@ -1,4 +1,7 @@
-1)Account Settings- Account Management,Validation - V 0.0.3
+1)Account Settings- 
+	a)Account Management
+	b)Validation - V 0.0.3
+	c)UI changes
 2)Money Manager
 3)Debt Manager-V 0.0.4
 4)Multi Todo App - V 0.0.5

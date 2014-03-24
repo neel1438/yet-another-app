@@ -32,7 +32,7 @@ if ('development' == app.get('env')) {
 }
 // check auth
 function checkauth(req, res, next) {
-		if (!req.session.user_email) {
+		if (!req.cookies.user_email) {
 			res.redirect('/login')
 		} else {
 			res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -59,7 +59,7 @@ contacts=contactconn.model('contacts',contactSchema);
 
 // show all contacts!!
 app.get('/contacts',checkauth,function(req,res){
-    contacts.find({user_email : req.session.user_email},function(err,docs){
+    contacts.find({user_email : req.cookies.user_email},function(err,docs){
       if(err) res.json(err)
       res.render('showcontacts',{c : docs});
       });
@@ -75,6 +75,7 @@ app.post('/contacts',checkauth,function(req,res){
     //res.send("Contact added !");
    // console.log(req.files);
     var newPath=__dirname+"/public/uploads/"+req.files.Image.originalFilename;
+    console.log(req.files.Image.originalFilename);
     fs.readFile(req.files.Image.path,function(err,data){
       if(err) res.send(err);
       fs.writeFile(newPath,data,function(err){
@@ -90,16 +91,21 @@ app.post('/contacts',checkauth,function(req,res){
       phone : b.phone,
       path : "/uploads/"+req.files.Image.originalFilename
       }).save(function(err,contact){
-      if(err) res.json(err);
-      res.redirect('/contact/'+ contact._id);
+      if(err) res.render('500',{msg: "Invalid values in fields"});
+
+      res.redirect('/contact/'+contact._id);
         });
      });
 
 // param method to select the contact exactly---ID is unique
 app.param('id' , function(req,res,next,id){
-contacts.find({_id :id,user_email : req.session.user_email},function(err,docs){
+contacts.find({_id :id,user_email : req.cookies.user_email},function(err,docs){
+if(err) res.render('404')
+else
+{
   req.contact=docs[0];
   next();
+  }
    });
     });
 
@@ -131,9 +137,10 @@ contacts.update({_id :req.params.id},
     name: b.name,
     place : b.place,
     email : b.email,
+    phone : b.phone,
     path : "/uploads/"+req.files.Image.originalFilename
   },function(err){
-  if(err) res.send(err)
+  if(err) res.send('error',{msg :" Update failed"})
   res.redirect("/contact/"+req.params.id)  
   });
     }
@@ -143,7 +150,8 @@ contacts.update({_id :req.params.id},
 		 {  
    			 name: b.name,
    			 place : b.place,
-   			 email : b.email,
+   			phone : b.phone,
+   			 email : b.email
   		},function(err){
   if(err) res.send(err)
   res.redirect("/contact/"+req.params.id)  
