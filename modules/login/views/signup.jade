@@ -1,16 +1,30 @@
-meta(name="viewport",content="width=device-width ,intial-scale=1.0")
 include cssjs
+meta(name="viewport",content="width=device-width ,intial-scale=1.0")
+link(href="/stylesheets/signup.css",rel="stylesheet")
+script(src="/javascripts/signup.js")
 body
-  div.container
-   div.row
-    div.col-md-4
-       form(action="/newuser",class="form-horizontal",method='post')
-        fieldset
-         legend Add User
-         input.input-lg(type='text',name='name', placeholder='Name')
-         span.help-block Your Name Please. 
-         input.input-lg(type='text',name='email', placeholder='Email address')
-         span.help-block Your Email ID. 
-         input.input-lg(type='password',name='password', placeholder='Password')
-         span.help-block Password.
-         input.btn.btn-lg(type='submit',class="btn-primary", value='Signup')
+ div.container
+  div.row
+   div.col-md-4
+    form(action="/newuser",class="form-horizontal",method='post',id="signup-form",role="form")
+      h2 Add User
+      div.form-group
+       label.control-label(for="name") Name
+       input.form-control(type='text',name='name', placeholder='Name',id="name")
+
+      div.form-group
+       label.control-label(for="email") Email
+       div
+        input.form-control(type='text',name='email', placeholder='Email address',id="email")
+      
+      div.form-group
+       label.control-label(for="password") Password
+       div
+        input.form-control(type='password',name='password', placeholder='Password',id="password")
+      div.form-group
+       label.control-label(for="cpassword" ) Confirm Password
+       div
+        input.form-control(type='password',name='cpassword', placeholder='Retype Password',id="cpassword")
+
+      div.form-actions
+       button.btn.btn-lg(type='submit',class="btn-primary") Signup

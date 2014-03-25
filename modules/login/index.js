@@ -31,7 +31,7 @@ if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 app.get('/',function(req,res){
-		if(req.session.user_email) res.redirect('/home')
+		if(req.cookies.user_email) res.redirect('/home')
 		else res.render('index')
 		});
 
