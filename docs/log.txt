@@ -14,4 +14,10 @@ Custom error pages -- login and contacts - 24 mar 2014
 
 Use cookies instead of sessions -- login - 24 mar 2014
 
+Signup and login Validation -- login - 25 mar 2014
+
+Navbar added -- login and contacts - 26 mar 2014
+
+Contacts Validation edit and add both -- contacts - 26 mar 2014
+
 

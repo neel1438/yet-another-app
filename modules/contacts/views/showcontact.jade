@@ -1,14 +1,16 @@
 include cssjs
+include navbar
 link(rel='stylesheet', href='/stylesheets/showcontact.css')
-ul
-  li  
-    img(src="#{contact.path}" ,alt="image not available!" )
-    p Name : 
-        strong #{contact.name}
-    p Place : #{contact.place}
-    p Email : #{contact.email}
-    p Phone : #{contact.phone}
-form.form-inline(action="/contact/#{contact._id}",method="post")
+body
+ ul.abcd
+  li.abc  
+   img(src="#{contact.path}" ,alt="image not available!" )
+   p Name : 
+    strong #{contact.name}
+   p Place : #{contact.place}
+   p Email : #{contact.email}
+   p Phone : #{contact.phone}
+  form.form-inline(action="/contact/#{contact._id}",method="post")
    input.btn.btn-primary(type='button',onclick='location.href="/contacts"',value="View All") 
    span &nbsp&nbsp;
    input.btn.btn-primary(type='button',onclick='location.href="/contact/#{contact._id}/edit"',value="Edit") 

@@ -1,7 +1,13 @@
 1)Account Settings- 
 	a)Account Management
-	b)Validation - V 0.0.3
-	c)UI changes
+		i)User Settings
+		ii)Change password
+		iii)email validation
+		iv)forget password-reset password
+
+	b)Validation - only file type validation left 
+	c)UI changes - progress
+
 2)Money Manager
 3)Debt Manager-V 0.0.4
 4)Multi Todo App - V 0.0.5

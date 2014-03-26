@@ -61,13 +61,13 @@ contacts=contactconn.model('contacts',contactSchema);
 app.get('/contacts',checkauth,function(req,res){
     contacts.find({user_email : req.cookies.user_email},function(err,docs){
       if(err) res.json(err)
-      res.render('showcontacts',{c : docs});
+      res.render('showcontacts',{c : docs,name:req.cookies.user_name});
       });
     });
 
 // add a contact form
 app.get('/contacts/new',checkauth,function(req,res){
-    res.render('addcontact');
+    res.render('addcontact',{name : req.cookies.user_name});
     });
 
 //adding the contact to db  and redirect to contacts page
@@ -84,7 +84,7 @@ app.post('/contacts',checkauth,function(req,res){
       });
     var b=req.body;
     new contacts({
-      user_email : req.session.user_email,
+      user_email : req.cookies.user_email,
       name : b.name,
       place : b.place,
       email : b.email,
@@ -92,7 +92,6 @@ app.post('/contacts',checkauth,function(req,res){
       path : "/uploads/"+req.files.Image.originalFilename
       }).save(function(err,contact){
       if(err) res.render('500',{msg: "Invalid values in fields"});
-
       res.redirect('/contact/'+contact._id);
         });
      });
@@ -111,12 +110,12 @@ else
 
 //personal contact page
 app.get("/contact/:id",checkauth,function(req,res){
-  res.render('showcontact',{contact : req.contact});
+  res.render('showcontact',{contact : req.contact,name :req.cookies.user_name});
   });
 
 //edit form
 app.get('/contact/:id/edit',checkauth,function(req,res){
-    res.render('editcontact',{contact : req.contact});
+    res.render('editcontact',{contact : req.contact,name : req.cookies.user_name});
     });
 
 // update db with edited row 

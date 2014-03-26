@@ -1,6 +1,7 @@
 include cssjs
-
 link(rel='stylesheet', href='/stylesheets/showcontacts.css')
+include navbar
+
 
 head
   script.
@@ -12,22 +13,12 @@ head
           itemSelector: '.item'
             });
          });
-div(style="float:right")
-    a(href="/contacts/new" class="btn btn-success")
-      i(class="glyphicon glyphicon-plus") 
-        span &nbspAdd-New
-    span &nbsp&nbsp;
-    a(href="/home", class="btn btn-info")
-      i(class="glyphicon glyphicon-arrow-left") 
-        span &nbspBack
-
-h1 Your Contacts
-hr
-div#container
-  each ac in c
-    a(href="/contact/#{ac._id}") 
-      div.item
-        img.img-thumbnail(src="#{ac.path}",height=auto ,width="72",style="{float: left}")
-        p 
-        strong  #{ac.name} 
+body
+ div#container
+   each ac in c
+     a(href="/contact/#{ac._id}") 
+       div.item
+         img.img-thumbnail(src="#{ac.path}",height=auto ,width="72",style="{float: left}")
+         p 
+         strong  #{ac.name} 
 

@@ -1,14 +1,12 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-* {margin: 0; padding: 0;}
- 
+/* 
 div {
     margin: 20px;
-}
+}*/
  
-ul {
+ul.abcd {
     list-style-type: none;
       width: 700px;
 }
@@ -17,24 +15,24 @@ h3 {
     font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
 }
  
-li img {
+li.abc img {
     float: left;
              margin: 0 15px 0 0;
 }
  
-li a {
+li.abc a {
     font: 200 18px/1.5 Georgia, Times New Roman, serif;
 }
-li p {
+li.abc p {
     font: 200 18px/1.5 Georgia, Times New Roman, serif;
 }
  
-li {
+li.abc {
     padding: 10px;
-               overflow: auto;
+    overflow: auto;
 }
  
-li:hover {
+li.abc:hover {
        background: #dff;
        cursor: pointer;
    }

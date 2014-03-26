@@ -21,3 +21,5 @@ Description - Used Unique Ids to rectify
 BugID - 002
 Description - Checks functions for all requests
 -----------------------------------------------------------------------------
+BugID - 003
+Description - used Jquery validate

@@ -1,20 +1,37 @@
 meta(name="viewport",content="width=device-width ,intial-scale=1.0")
 include cssjs
+include navbar
+link(href="/stylesheets/addcontact.css",rel="stylesheet")
+script(src="/javascripts/addcontact.js")
+
 body
-  div.container
-   div.row
-    div.col-md-4
-       form(action="/contacts",class="form-horizontal",method='post',enctype="multipart/form-data")
-        fieldset
-         legend Add Contact
-         input.input-lg(type='text',name='name', placeholder='Name')
-         span.help-block Name of the Contact. 
-         input.input-lg(type='text',name="place", placeholder='Place')
-         span.help-block Where does the contact live ?. 
-         input.input-lg(type='text',name='email', placeholder='Email address')
-         span.help-block Email ID of the Contact. 
-         input.input-lg(type='text',name='phone', placeholder='Phone number')
-         span.help-block PhoneNumber of the Contact.
-         input(type="file",name="Image")
-         input.btn.btn-lg(type='submit',name='add',class="btn-primary", value='Add')
+ div.container
+  div.row
+   div.col-md-4
+    form(action="/contacts",class="form-horizontal",method='post',enctype="multipart/form-data",id="addcontactform",role="form")
+     h2  Add Contact
+     
+     div.form-group
+      label.control-label(for="name") Name
+      div
+       input.form-control(type='text',name='name', placeholder='Name',id="name")
+     div.form-group
+      label.control-label(for="email") Email Address
+      div
+       input.form-control(type='text',name='email', placeholder='Email address',id="email")
+     div.form-group
+      label.control-label(for="phone") Phone
+      div
+       input.form-control(type='text',name='phone', placeholder='Phone number',id="phone")
+     div.form-group
+      label.control-label(for="place") Place
+      div
+       input.form-control(type='text',name="place", placeholder='Place',id="place")
+     div.form-group
+      label.control-label(for="image") Upload Image
+      div
+       input(type="file",name="Image",id="image")
+       p.help-block jpg or png or gif only
+     div
+      button.btn.btn-lg(type='submit',name='add',class="btn-primary") Add
     
