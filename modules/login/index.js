@@ -31,7 +31,7 @@ if ('development' == app.get('env')) {
 	app.use(express.errorHandler());
 }
 app.get('/',function(req,res){
-		if(req.cookies.user_email) res.redirect('/home')
+		if(req.cookies.user_name) res.render('home',{name : req.cookies.user_name})
 		else res.render('index')
 		});
 
@@ -74,18 +74,18 @@ app.get('/login',function(req,res){
 app.post('/loginuser',function(req,res){
 		var b=req.body;
 		user.find({email : b.email},function(err,docs){
-			if(!docs[0]) res.render('error',{msg:"Invalid Username"});
+			if(!docs[0]) res.render('error',{msg : "Invalid Username"});
 			else{
 			var lol=docs[0];
 			bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
 			if(isloggedin)
 			{
 			res.cookie('user_email',b.email)
+			res.cookie('user_name',lol.name)
 			res.redirect('/home')
 			}
 			else res.render('error',{msg: "Wrong Password"})
-			}
-			);
+			});
 			}
 			});
 		});
@@ -109,6 +109,7 @@ app.post('/newuser',function(req,res){
 				else
 				{
 					res.cookie('user_email',b.email)
+					res.cookie('user_name',b.name)
 					res.redirect('/home');
 				}
 				});
@@ -120,9 +121,10 @@ app.post('/newuser',function(req,res){
 });
 app.get('/home',checkauth,function(req,res)
 		{
-		res.render('home');
+		res.render('home',{name : req.cookies.user_name});
 		});
 app.get('/logout',checkauth,function(req,res){
 		res.clearCookie('user_email');
+		res.clearCookie('user_name');
 		res.redirect('/');
 		});
