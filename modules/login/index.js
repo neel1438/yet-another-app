@@ -59,7 +59,9 @@ function checkauth(req, res, next) {
 }
 
 
-
+app.get("/settings",checkauth,function(req,res){
+		res.render("settings",{name : req.cookies.user_name})
+		});
 
 // add a signup form
 app.get('/signup',function(req,res){
