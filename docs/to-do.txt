@@ -1,16 +1,19 @@
 1)Account Settings- 
 	a)Account Management
-		i)User Settings
-		ii)Change password
-		iii)email validation
-		iv)forget password-reset password
+		i)User Settings -- modifications
+		ii)email validation
+		iii)forget password
+		iv)reset password
 
-	b)Validation - only file type validation left 
-	c)UI changes - progress
+	b)UI changes - progress
 
 2)Money Manager
 3)Debt Manager-V 0.0.4
 4)Multi Todo App - V 0.0.5
 5)Security Updates - V 0.0.6
+6)Add contacts -> Add Friends
+7)Chat
+8) Upcoming revolutionary Ideas
+
 
 Before each release Major UI Update -- form V-0.0.3

@@ -11,6 +11,7 @@ BugID - 003
 Description - Validation of form fields new contact
 -----------------------------------------------------------------------------
 BugID - 004
+Description - can upload wrong file even after labels are changed
 
 Bugs Fixed
 ==========

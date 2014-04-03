@@ -20,4 +20,6 @@ Navbar added -- login and contacts - 26 mar 2014
 
 Contacts Validation edit and add both -- contacts - 26 mar 2014
 
+file vaildation in both edit and add contacts -- contacts - 2 apr 2014
 
+Change Password added  -- login - 3 apr 2014

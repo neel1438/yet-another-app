@@ -24,9 +24,6 @@ $(document).ready(function(){
 		
 	      }
 	     
-	 
-
-			
 	     },
 			highlight: function(element) {
 				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -38,5 +35,27 @@ $(document).ready(function(){
 				.closest('.form-group').removeClass('has-error').addClass('has-success');
 			}
 	  });
+		$('input[type=file]').change(function(e){
+  			filename=$(this).val();
+  			console.log(filename);
+  			extenstion=filename.split(".");
+  			while(extenstion.length!=1)
+  			{
+  				extenstion.shift();
+  			}
+  			extenstion=extenstion.toString();
+  			console.log(extenstion);
+  			if(extenstion ==="jpg" || extenstion === "png" || extenstion ==="gif" || extenstion === "JPG" || extenstion=== "PNG" || extenstion==="GIF")
+  			{
+  				$(this).text('OK!').addClass('valid')
+  				.closest('.form-group').removeClass('has-error').addClass('has-success');
+  					   
+  			}
+  			else
+  			{
+  				$(this).closest('.form-group').removeClass('has-success').addClass('has-error');
+  			}
+
+  		});
 
 }); // end 

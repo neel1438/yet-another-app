@@ -152,7 +152,7 @@ contacts.update({_id :req.params.id},
    			phone : b.phone,
    			 email : b.email
   		},function(err){
-  if(err) res.send(err)
+  if(err) res.render("error", {msg : "Contact could not be updated!"})
   res.redirect("/contact/"+req.params.id)  
   });
  }

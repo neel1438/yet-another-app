@@ -49,47 +49,14 @@ passwordhash: String
 //instance variable
 user=userconn.model('user',userSchema);
 
-function checkauth(req, res, next) {
-	if (!req.cookies.user_email) {
-		res.redirect('/login')
-	} else {
-		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-		next()
-	}
-}
 
 
-app.get("/settings",checkauth,function(req,res){
-		res.render("settings",{name : req.cookies.user_name})
-		});
+
 
 // add a signup form
 app.get('/signup',function(req,res){
-		if(req.cookies.user_email) res.send("already logged in! Please logout out first!")
+		if(req.cookies.user_email) res.render("error",{msg : "already logged in! Please logout out first!"})
 		else res.render('signup');
-		});
-//login page
-app.get('/login',function(req,res){
-		if(req.cookies.user_email) res.send("Already logged in");
-		else res.render('login');
-		});
-app.post('/loginuser',function(req,res){
-		var b=req.body;
-		user.find({email : b.email},function(err,docs){
-			if(!docs[0]) res.render('error',{msg : "Invalid Username"});
-			else{
-			var lol=docs[0];
-			bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
-			if(isloggedin)
-			{
-			res.cookie('user_email',b.email)
-			res.cookie('user_name',lol.name)
-			res.redirect('/home')
-			}
-			else res.render('error',{msg: "Wrong Password"})
-			});
-			}
-			});
 		});
 
 //singup form submission
@@ -121,10 +88,84 @@ app.post('/newuser',function(req,res){
 		});
 
 });
+
+//login page
+app.get('/login',function(req,res){
+		if(req.cookies.user_email) res.send("error",{msg :"Already logged in"});
+		else res.render('login');
+		});
+
+
+// login submission
+app.post('/loginuser',function(req,res){
+		var b=req.body;
+		user.find({email : b.email},function(err,docs){
+			if(!docs[0]) res.render('error',{msg : "Invalid Username"});
+			else{
+			var lol=docs[0];
+			bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
+			if(isloggedin)
+			{
+			res.cookie('user_email',b.email)
+			res.cookie('user_name',lol.name)
+			res.redirect('/home')
+			}
+			else res.render('error',{msg: "Wrong Password"})
+			});
+			}
+			});
+		});
+
+
+//Checking Authentication
+function checkauth(req, res, next) {
+	if (!req.cookies.user_email) {
+		res.redirect('/login')
+	} else {
+		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+		next()
+	}
+}
+
+// Home page
 app.get('/home',checkauth,function(req,res)
 		{
 		res.render('home',{name : req.cookies.user_name});
 		});
+//Settings Page
+app.get("/settings",checkauth,function(req,res){
+		user.find({email : req.cookies.user_email},function(err,docs){
+						res.render("settings",{name : req.cookies.user_name,c :docs[0]})
+		});
+	});
+
+//change password 
+app.post("/changepasswd",checkauth,function(req,res){
+	var b=req.body;
+	bcrypt.genSalt(10, function(err, salt) {
+ 		bcrypt.hash(b.password, salt, function(err, hash) {
+			if(err) throw err;
+			else 
+			{
+				user.update({email : req.cookies.user_email},
+				{
+					passwordhash : hash
+				},
+				function(err){
+					if(err) res.render("error",{msg: "Password could not be updated"});
+					res.redirect("/settings");
+				});
+			}	
+		});
+	});
+});
+		
+			
+
+
+
+
+//Logout function
 app.get('/logout',checkauth,function(req,res){
 		res.clearCookie('user_email');
 		res.clearCookie('user_name');
