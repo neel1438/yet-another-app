@@ -1,19 +1,20 @@
-1)Account Settings- 
+use config.js
+Account Settings 
 	a)Account Management
 		i)User Settings -- modifications
-		ii)email validation
-		iii)forget password
-		iv)reset password
-
+		ii)forget password
 	b)UI changes - progress
+Money Manager -- SPA Angular.js
+Debt Manager
+Multi Todo App 
+Security Updates
+Add contacts -> Add Friends
+Chat
+Notes 
+Photos
+Calendar
+other media
+Upcoming revolutionary Ideas
 
-2)Money Manager
-3)Debt Manager-V 0.0.4
-4)Multi Todo App - V 0.0.5
-5)Security Updates - V 0.0.6
-6)Add contacts -> Add Friends
-7)Chat
-8) Upcoming revolutionary Ideas
 
-
-Before each release Major UI Update -- form V-0.0.3
+Before each release Major UI Update 

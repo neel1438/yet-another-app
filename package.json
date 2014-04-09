@@ -6,12 +6,15 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
-    "express": "*",
-    "jade": "*" ,
-    "mongoose" : "*",
-    "bcrypt" : "*"
+    "express": "latest",
+    "jade": "latest" ,
+    "mongoose" : "latest",
+    "bcrypt" : "latest",
+    "socket.io": "latest",
+    "express-mailer" :"latest",
+    "crypto" : "latest"
   },
   "devDependencies" :{
-    "nodemon" : "*"
+    "nodemon" : "latest"
   }
 }
