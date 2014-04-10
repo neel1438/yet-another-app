@@ -12,6 +12,7 @@ var bcrypt=require('bcrypt');
 var app = module.exports =express();
 var mailer=require('express-mailer');
 var crypto=require('crypto');
+var config=require('../../config');
 
 
 // all environments
@@ -36,32 +37,14 @@ if ('development' == app.get('env')) {
 }
 
 // mailer config 
-mailer.extend(app, {
-  from: 'no-reply@yet-another-app.com',
-  host: 'smtp.gmail.com', // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-  auth: {
-    user: 'moneylover1438@gmail.com',
-    pass: '2bhuvi8h38'
-  }
-});
+mailer.extend(app,config.mailer);
 
 // db connection
-var userconn=mongoose.createConnection("mongodb://localhost/users");
+var userconn=mongoose.createConnection(config.db.userconn);
 
 
 //db schema
-var userSchema=new mongoose.Schema(
-		{
-name: String,
-email: String,
-passwordhash: String,
-validated : Boolean,
-randomToken :String
-}
-);
+var userSchema=new mongoose.Schema(config.db.userSchema);
 
 //instance variable
 user=userconn.model('user',userSchema);
@@ -70,16 +53,16 @@ user=userconn.model('user',userSchema);
 
 // '/' route  
 app.get('/',function(req,res){
-		if(req.cookies.user_name) res.render('home',{name : req.cookies.user_name})
-		else res.render('index')
-		});
+	if(req.cookies.user_name) res.render('home',{name : req.cookies.user_name})
+	else res.render('index')
+});
 
 
 // add a signup form
 app.get('/signup',function(req,res){
-		if(req.cookies.user_email) res.render("error",{msg : "Already logged in! Please logout out first!"})
-		else res.render('signup');
-		});
+	if(req.cookies.user_email) res.render("error",{msg : "Already logged in! Please logout out first!"})
+	else res.render('signup');
+});
 
 
 //singup form submission
@@ -97,7 +80,7 @@ app.post('/newuser',function(req,res){
 				var userobj={
 					name : b.name,
 					email :b.email,
-					passwordhash : hash,
+					passwordHash : hash,
 					randomToken : Rtoken,
 					validated : false
 					}
@@ -116,7 +99,7 @@ app.post('/newuser',function(req,res){
            					console.log(err);
     						res.render('error' ,{msg:'There was an error sending the email'});
     						}
-    					res.redirect('/');
+    					res.render("validate", {msg:"Email Sent! Confirm Your Email Address "});
   						})
 					}
 				});
@@ -166,7 +149,7 @@ app.post('/loginuser',function(req,res){
 			var lol=docs[0];
 			if(lol.validated)
 			{
-				bcrypt.compare(b.password,lol.passwordhash, function(err,isloggedin) {	
+				bcrypt.compare(b.password,lol.passwordHash, function(err,isloggedin) {	
 				if(isloggedin)
 				{
 					res.cookie('user_email',b.email)
@@ -178,44 +161,26 @@ app.post('/loginuser',function(req,res){
 			}
 			else
 			{
-				res.render("validate",{msg:"Please validate your Email Address"})
+				res.render("validate",{msg:"Please Validate Your Email Address"})
 			}
 		}
 	});
 });	
 
-
-
-//Checking Authentication
-function checkauth(req, res, next) {
-	if (!req.cookies.user_email) 
-	{
-		res.redirect('/login')
-	} 
-	else
-	{
-		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-		next()
-	}
-}
-
-
 // Home page
-app.get('/home',checkauth,function(req,res){
+app.get('/home',config.checkAuth,function(req,res){
 	res.render('home',{name : req.cookies.user_name});
 });
 
-
 //Settings Page
-app.get("/settings",checkauth,function(req,res){
+app.get("/settings",config.checkAuth,function(req,res){
 	user.find({email : req.cookies.user_email},function(err,docs){
 		res.render("settings",{name : req.cookies.user_name,c :docs[0]})
 	});
 });
 
-
 //change password 
-app.post("/changepasswd",checkauth,function(req,res){
+app.post("/changepasswd",config.checkAuth,function(req,res){
 	var b=req.body;
 	bcrypt.genSalt(10, function(err, salt) {
  		bcrypt.hash(b.password, salt, function(err, hash) {
@@ -224,7 +189,7 @@ app.post("/changepasswd",checkauth,function(req,res){
 			{
 				user.update({email : req.cookies.user_email},
 				{
-					passwordhash : hash
+					passwordHash : hash
 				},
 				function(err){
 					if(err) res.render("error",{msg: "Password could not be updated"});
@@ -234,11 +199,10 @@ app.post("/changepasswd",checkauth,function(req,res){
 		});
 	});
 });
-		
 
 //Logout function
-app.get('/logout',checkauth,function(req,res){
-		res.clearCookie('user_email');
-		res.clearCookie('user_name');
-		res.redirect('/');
-		});
+app.get('/logout',config.checkAuth,function(req,res){
+	res.clearCookie('user_email');
+	res.clearCookie('user_name');
+	res.redirect('/');
+});

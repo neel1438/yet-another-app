@@ -27,3 +27,5 @@ File vaildation in both edit and add contacts -- contacts - 2 apr 2014
 Change Password added  -- login - 3 apr 2014
 
 Email confirmation added -- login - 9 apr 2014
+
+config js added -- all - 10 apr 2014

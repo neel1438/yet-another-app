@@ -1,8 +1,8 @@
-use config.js
 Account Settings 
 	a)Account Management
-		i)User Settings -- modifications
+		i)Unique email registration
 		ii)forget password
+		iii)User Settings -- modifications
 	b)UI changes - progress
 Money Manager -- SPA Angular.js
 Debt Manager

@@ -12,6 +12,10 @@ Description - Validation of form fields new contact
 -----------------------------------------------------------------------------
 BugID - 004
 Description - can upload wrong file even after labels are changed
+-----------------------------------------------------------------------------
+BugID- 005
+Description - same email id can register as many times as possible  
+-----------------------------------------------------------------------------
 
 Bugs Fixed
 ==========
