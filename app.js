@@ -7,7 +7,7 @@ var http = require('http');
 var path = require('path');
 var contacts=require("./modules/contacts");
 var login=require("./modules/login");
-var money=require("./modules/money");
+
 var todo=require("./modules/todo");
 var app=express();
 
@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 //  App modules
 app.use(login);
 app.use(contacts);
-app.use(money);
+
 app.use(todo);
 app.get('*',function(req,res){res.render('404')});
 

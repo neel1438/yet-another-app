@@ -7,12 +7,21 @@
   },
   "dependencies": {
     "express": "latest",
+    "body-parser" :"latest",
     "jade": "latest" ,
     "mongoose" : "latest",
     "bcrypt" : "latest",
     "socket.io": "latest",
     "express-mailer" :"latest",
-    "crypto" : "latest"
+    "crypto" : "latest",
+    "favicon" :"latest",
+    "cookie-parser" : "latest",
+    "morgan" : "latest",
+    "method-override":"latest",
+    "express-session" :"latest",
+    "errorhandler" : "latest"
+
+
   },
   "devDependencies" :{
     "nodemon" : "latest"

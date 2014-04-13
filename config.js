@@ -27,26 +27,24 @@ module.exports.db = {
       	email: String,
       	phone: Number,
       	path : String
-    },
-    moneyconn : "mongodb://localhost/money" ,
-    moneySchema : {
-      user_email: String,
-      name: String,
-      amount: Number,
-      description : String,
-      tag : String
-    },
-    todoConnection: "mongodb://localhost/todo" ,
-    todoSchema : {
-      user_email : String,
-      description : String,
-      done : Boolean,
-      tag : String
-    } 
-
+  },
+  moneyconn : "mongodb://localhost/money" ,
+  moneySchema : {
+    user_email: String,
+    name: String,
+    amount: Number,
+    description : String,
+    tag : String
+  },
+  todoConnection: "mongodb://localhost/todo" ,
+  todoSchema : {
+    user_email : String,
+    description : String,
+    done : Boolean,
+    tag : String
+  } 
 };
 
-//Checking Authentication
 module.exports.checkAuth=
 function(req, res, next) {
 	if (!req.cookies.user_email) res.redirect('/login')

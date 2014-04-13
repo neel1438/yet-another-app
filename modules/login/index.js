@@ -7,34 +7,37 @@ var express = require('express');
 var mongoose=require('mongoose');
 var http = require('http');
 var path = require('path');
-var fs = require('fs');
 var bcrypt=require('bcrypt');
-var app = module.exports =express();
 var mailer=require('express-mailer');
 var crypto=require('crypto');
 var config=require('../../config');
+var bodyParser = require('body-parser');
+var favicon =require("favicon");
+var cookieParser=require('cookie-parser');
+var logger=require('morgan');
+var methodOverride=require("method-override");
+var errorHandler=require("errorhandler");
 
+
+var app =module.exports =express();
 
 // all environments
-app.set('port',  process.env.PORT || 3000);
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.cookieParser());
-app.use(express.session({secret : "qwe123"}));
-app.use(express.bodyParser());
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(logger());
+app.use(methodOverride());
+//app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // development only
 if ('development' == app.get('env')) {
-	app.use(express.errorHandler());
+  app.use(errorHandler());
 }
+
+
 
 // mailer config 
 mailer.extend(app,config.mailer);
