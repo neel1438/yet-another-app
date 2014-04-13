@@ -11,15 +11,15 @@ module.exports.mailer={
    }
 };
 module.exports.db = {
-	userconn : "mongodb://localhost/users",
+	userConnection : "mongodb://localhost/users",
 	userSchema : {
 		name : String,
 		email : String,
 		passwordHash : String,
 		validated : Boolean,
-		randomToken :String
+		randomToken : String
 	},
-	contactconn : "mongodb://localhost/contacts" ,
+	contactConnection : "mongodb://localhost/contacts" ,
 	contactSchema :  {
       	user_email: String,
       	name: String,
@@ -34,6 +34,13 @@ module.exports.db = {
       name: String,
       amount: Number,
       description : String,
+      tag : String
+    },
+    todoConnection: "mongodb://localhost/todo" ,
+    todoSchema : {
+      user_email : String,
+      description : String,
+      done : Boolean,
       tag : String
     } 
 

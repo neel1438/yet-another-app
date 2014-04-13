@@ -7,6 +7,7 @@ Account Settings
 Money Manager -- SPA Angular.js
 Debt Manager
 Multi Todo App 
+	a)advanced options
 Security Updates
 Add contacts -> Add Friends
 Chat

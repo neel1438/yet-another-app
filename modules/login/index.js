@@ -40,14 +40,14 @@ if ('development' == app.get('env')) {
 mailer.extend(app,config.mailer);
 
 // db connection
-var userconn=mongoose.createConnection(config.db.userconn);
+var userConnection=mongoose.createConnection(config.db.userConnection);
 
 
 //db schema
 var userSchema=new mongoose.Schema(config.db.userSchema);
 
 //instance variable
-user=userconn.model('user',userSchema);
+user=userConnection.model('user',userSchema);
 
 
 

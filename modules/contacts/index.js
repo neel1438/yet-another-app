@@ -13,7 +13,7 @@ var config=require("../../config.js");
 var app =module.exports =express();
 
 // all environments
-app.set('port',  process.env.PORT || 3000);
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.bodyParser());
@@ -33,13 +33,13 @@ if ('development' == app.get('env')) {
 
 
 // db connection
-var contactconn=mongoose.createConnection(config.db.contactconn);
+var contactConnection=mongoose.createConnection(config.db.contactConnection);
 
 //db schema
 var contactSchema=new mongoose.Schema(config.db.contactSchema);
 
 //instance variable
-contacts=contactconn.model('contacts',contactSchema);
+contacts=contactConnection.model('contacts',contactSchema);
 
 // show all contacts!!
 app.get('/contacts', config.checkAuth ,function(req,res)
