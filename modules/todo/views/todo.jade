@@ -4,14 +4,17 @@ html(ng-app="Todo")
 head
  meta(charset="utf-8")
  meta(name="viewport" content="width=device-width, initial-scale=1")
- title Todo 
+ title Todo
+ 
+ script(src='javascripts/services/todo_service.js')
+ script(src='javascripts/controllers/todo_controller.js') 
  script(src="/javascripts/todo.js")
  style
     html { overflow-y:scroll; }
     body { padding-top:50px; }
     #todo-list { margin-bottom:30px; }
   
-body(ng-controller="todoController")
+body(ng-controller="todoCtrl")
  div.container
   div.jumbotron(class="text-center")
    h1 Task Manager
